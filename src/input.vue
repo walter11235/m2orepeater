@@ -13,7 +13,9 @@
       console.log(values);
       
       const fieldsNode = document.querySelectorAll('[data-field]');
+      console.log(fieldsNode);
       const typeField = document.querySelector('[data-field=type]');
+      console.log(typeField);
       const options = this.getOptions();
 
       // hide all fields until the user choose a type

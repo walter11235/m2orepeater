@@ -11,6 +11,8 @@
     mixins: [mixin],
     computed: {
       displayValue() {
+        console.log("this is in display vue");
+        console.log(this.value);
         if (this.value)
           return this.value.toLowerCase();
       }

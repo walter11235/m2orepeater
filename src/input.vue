@@ -1,5 +1,8 @@
 <template>
-  <input @input="emitValue" :value="value" />
+  <div>
+    <input @input="emitValue" :value="value" />
+    <button onclick="foo">foo</button>
+  </div>
 </template>
 
 <script>
@@ -12,10 +15,13 @@
       const { values } = this._props
       console.log(values);
       
+      // To take all 
       const fieldsNode = document.querySelectorAll('[data-field]');
       console.log(fieldsNode);
       const typeField = document.querySelector('[data-field=type]');
       console.log(typeField);
+
+      const valueTable = document.querySelector('.row-container');
       const options = this.getOptions();
 
       // hide all fields until the user choose a type
@@ -36,7 +42,13 @@
         })
       }
     },
+    updated() {
+      // After attribute is updated
+    },
     methods: {
+      foo: function() {
+        console.log("button")
+      },
       emitValue(event) {
         const value = event.target.value;
         this.$emit("input", value);

@@ -36,6 +36,7 @@
       console.log("val is: ");
       console.log(val);
       const collectionName = val.innerHTML;
+      console.log(collectionName);
       callAPI(collectionName);
 
 

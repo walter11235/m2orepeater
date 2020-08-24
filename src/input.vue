@@ -24,9 +24,17 @@
       const m2oplace = document.querySelectorAll('div[input-name="m2orepeater"]');
       console.log("m2oplace: ");
       console.log(m2oplace);
-      const content2up = document.getElementsByClassName('content two-up');
+      const content2up = document.getElementsByClassName('content two-up'); // or document.querySelectorAll('section.content.two-up')
       console.log("content2up: ");
       console.log(content2up);
+
+      const collection = content2up.childNodes[0];
+      console.log("first child node: ");
+      console.log(collection);
+      const collecttionName = collection.innerText;      
+      console.log("child node name: ");
+      console.log(collecttionName);
+
 
       const valueTable = document.querySelector('.row-container');
       const options = this.getOptions();

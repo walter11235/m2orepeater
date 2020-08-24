@@ -31,7 +31,7 @@
       const content2up0 = content2up[0].firstElementChild;
       console.log("first child node: ");
       console.log(content2up0);
-      const val = content2up0.getElementsByClassName('value').getElementsByClassName('no-wrap');
+      const val = content2up0.querySelector('.value .no-wrap');
       console.log("val is: ");
       console.log(val);
 

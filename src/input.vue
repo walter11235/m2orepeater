@@ -1,7 +1,7 @@
 <template>
   <div>
+    <div>{{callAPI}}</div>
     <button v-on:click="foo">foo</button>
-    <div id="pare"></div>
   </div>
 </template>
 
@@ -11,6 +11,11 @@
 
   export default {
     mixins: [mixin],
+    data() {
+      return {
+        collectionName: "",
+      };
+    },
     mounted() {
       // Fetch block options
       const { values } = this._props
@@ -35,9 +40,9 @@
       const val = content2up0.querySelector('.value .no-wrap');
       console.log("val is: ");
       console.log(val);
-      const collectionName = val.innerHTML.toLowerCase().replace(" ","_");
-      console.log(collectionName);
-      callAPI(collectionName);
+      this.collectionName = val.innerHTML.toLowerCase().replace(/ /g,"_");
+      console.log(this.collectionName);
+      //callAPI(collectionName);
 
 
       const valueTable = document.querySelector('.row-container');
@@ -77,17 +82,18 @@
       }
     },
     computed: {
-      callAPI(collectionName) {
+      callAPI() {
       let vm = this;
       let DIRECTUS_ITEM_URL = "http://localhost:2443/corporatesite/items/";
 
       this.$api.axios
         .get(
           DIRECTUS_ITEM_URL +
-            collectionName 
+            vm.collectionName 
         )
         .then(function(response) {
           console.log(response);
+          return response;
         })
         .catch(function(error) {
           console.error("Error:", error);

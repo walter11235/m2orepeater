@@ -106,11 +106,21 @@
         let fullURL = DIRECTUS_ITEM_URL + vm.collectionName;
         console.log("full URL is: ");
         console.log(fullURL);
+        fetch(fullURL) // Call the fetch function passing the url of the API as a parameter
+        .then((resp) => resp.json())
+        .then(function(response) {
+            // Your code for handling the data you get from the API
+            console.log(response);
+            this.restData = response;
+        })
+        .catch(function(error) {
+            // This is where you run code if the server returns any errors
+            console.error("Error:", error);
+        });
+
+        /*
         this.$api.axios
-          .get(
-            DIRECTUS_ITEM_URL +
-              vm.collectionName 
-          )
+          .get(fullURL)
           .then(function(response) {
             console.log(response);
             this.restData = response;
@@ -118,7 +128,7 @@
           })
           .catch(function(error) {
             console.error("Error:", error);
-          });
+          });*/
 
         return null;
       }

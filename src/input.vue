@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div>{{callAPI}}</div>
+    <div>{{restData}}</div>
     <button v-on:click="foo">foo</button>
   </div>
 </template>
@@ -106,7 +106,7 @@
         let fullURL = DIRECTUS_ITEM_URL + vm.collectionName;
         console.log("full URL is: ");
         console.log(fullURL);
-        axios
+        this.$api.axios
           .get(
             DIRECTUS_ITEM_URL +
               vm.collectionName 

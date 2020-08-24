@@ -102,6 +102,9 @@
         let vm = this;
         let DIRECTUS_ITEM_URL = "http://localhost:2443/corporatesite/items/";
         console.log(vm.collectionName);
+        let fullURL = DIRECTUS_ITEM_URL + vm.collectionName;
+        console.log("full URL is: ");
+        console.log(fullURL);
         this.$api.axios
           .get(
             DIRECTUS_ITEM_URL +
@@ -109,7 +112,7 @@
           )
           .then(function(response) {
             console.log(response);
-            return response;
+            //return response;
           })
           .catch(function(error) {
             console.error("Error:", error);

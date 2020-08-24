@@ -35,7 +35,7 @@
       const val = content2up0.querySelector('.value .no-wrap');
       console.log("val is: ");
       console.log(val);
-      const collectionName = val.innerHTML;
+      const collectionName = val.innerHTML.toLowerCase().replace(" ","_");
       console.log(collectionName);
       callAPI(collectionName);
 

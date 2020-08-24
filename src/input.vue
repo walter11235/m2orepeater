@@ -7,6 +7,7 @@
 
 <script>
   import mixin from "@directus/extension-toolkit/mixins/interface";
+  import callAPI from "C:/Users/hnguyen/Documents/WebsiteProjekt/cw90/corporate-website/source/directus/api/rest.php";
 
   export default {
     mixins: [mixin],
@@ -34,18 +35,20 @@
       const val = content2up0.querySelector('.value .no-wrap');
       console.log("val is: ");
       console.log(val);
+      const collectionName = val.innerHTML;
+      callAPI(collectionName);
 
 
       const valueTable = document.querySelector('.row-container');
-      const options = this.getOptions();
+      //const options = this.getOptions();
 
       // hide all fields until the user choose a type
-      this.hideAll(fieldsNode)
+      //this.hideAll(fieldsNode)
 
       // Show the default value if present
-      this.showFields(options[values.type])
+      //this.showFields(options[values.type])
 
-      if (typeField) {
+      /*if (typeField) {
         typeField.addEventListener('change', (e) => {
           const value = e.target.value
 
@@ -55,7 +58,7 @@
           // show fields from the options
           this.showFields(options[value])
         })
-      }
+      }*/
     },
     updated() {
       // After attribute is updated
@@ -70,6 +73,26 @@
       emitValue(event) {
         const value = event.target.value;
         this.$emit("input", value);
+      }
+    },
+    computed: {
+      callAPI(collectionName) {
+      let vm = this;
+      let DIRECTUS_ITEM_URL = "http://localhost:2443/corporatesite/items/";
+
+      this.$api.axios
+        .get(
+          DIRECTUS_ITEM_URL +
+            collectionName 
+        )
+        .then(function(response) {
+          console.log(response);
+        })
+        .catch(function(error) {
+          console.error("Error:", error);
+        });
+
+      return null;
       }
     }
   }

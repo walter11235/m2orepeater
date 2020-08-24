@@ -1,7 +1,7 @@
 <template>
   <div>
-    <input @input="emitValue" :value="value" />
-    <button onclick="foo">foo</button>
+    <button v-on:click="foo">foo</button>
+    <div id="pare"></div>
   </div>
 </template>
 
@@ -17,9 +17,16 @@
       
       // To take all 
       const fieldsNode = document.querySelectorAll('[data-field]');
+      console.log("fieldsnode: ");
       console.log(fieldsNode);
       const typeField = document.querySelector('[data-field=type]');
-      console.log(typeField);
+      // console.log(typeField);
+      const m2oplace = document.querySelectorAll('div[input-name="m2orepeater"]');
+      console.log("m2oplace: ");
+      console.log(m2oplace);
+      const content2up = document.getElementsByClassName('content two-up');
+      console.log("content2up: ");
+      console.log(content2up);
 
       const valueTable = document.querySelector('.row-container');
       const options = this.getOptions();
@@ -44,10 +51,13 @@
     },
     updated() {
       // After attribute is updated
+      // Watch changes from the collections field
     },
     methods: {
       foo: function() {
-        console.log("button")
+        console.log("button");
+        //console.log(document);
+
       },
       emitValue(event) {
         const value = event.target.value;

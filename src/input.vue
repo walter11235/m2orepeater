@@ -31,9 +31,9 @@
       const content2up0 = content2up[0].firstElementChild;
       console.log("first child node: ");
       console.log(content2up0);
-      const collecttionName = content2up0.innerHTML;      
-      console.log("child node name: ");
-      console.log(collecttionName);
+      const val = content2up0.getElementsByClassName('value').getElementsByClassName('no-wrap');
+      console.log("val is: ");
+      console.log(val);
 
 
       const valueTable = document.querySelector('.row-container');

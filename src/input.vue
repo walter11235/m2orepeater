@@ -28,14 +28,10 @@
       console.log("content2up: ");
       console.log(content2up);
 
-      const collection = content2up.childNodes[0];
+      const coll = content2up.childNodes[0];
       console.log("first child node: ");
-      console.log(collection);
-      const collecttionName = collection.innerText;      
-      console.log("child node name: ");
-      console.log(collecttionName);
-      console.log("child node name: ");
-      console.log(collecttionName);
+      console.log(coll);
+      const collecttionName = coll.textContent;      
       console.log("child node name: ");
       console.log(collecttionName);
 

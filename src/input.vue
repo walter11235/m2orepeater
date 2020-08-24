@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div>{{restData}}</div>
+    <div>{{callAPI}}</div>
     <button v-on:click="foo">foo</button>
   </div>
 </template>
@@ -110,6 +110,7 @@
         .then((resp) => resp.json())
         .then(function(response) {
             // Your code for handling the data you get from the API
+            console.log("inside fetch");
             console.log(response);
             this.restData = response;
         })
@@ -118,17 +119,18 @@
             console.error("Error:", error);
         });
 
-        /*
+        
         this.$api.axios
           .get(fullURL)
           .then(function(response) {
+            console.log("inside axios");
             console.log(response);
             this.restData = response;
             //return response;
           })
           .catch(function(error) {
             console.error("Error:", error);
-          });*/
+          });
 
         return null;
       }

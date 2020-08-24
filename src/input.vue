@@ -105,7 +105,7 @@
         let fullURL = DIRECTUS_ITEM_URL + vm.collectionName;
         console.log("full URL is: ");
         console.log(fullURL);
-        dropdownAlternative = [];
+        var dropdownAlternative = [];
         fetch(fullURL) // Call the fetch function passing the url of the API as a parameter
         .then((resp) => resp.json())
         .then(function(response) {

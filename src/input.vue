@@ -14,6 +14,7 @@
     data() {
       return {
         collectionName: "",
+        restData: null,
       };
     },
     mounted() {
@@ -105,13 +106,14 @@
         let fullURL = DIRECTUS_ITEM_URL + vm.collectionName;
         console.log("full URL is: ");
         console.log(fullURL);
-        this.$api.axios
+        axios
           .get(
             DIRECTUS_ITEM_URL +
               vm.collectionName 
           )
           .then(function(response) {
             console.log(response);
+            this.restData = response;
             //return response;
           })
           .catch(function(error) {

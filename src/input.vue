@@ -34,6 +34,10 @@
       const collecttionName = collection.innerText;      
       console.log("child node name: ");
       console.log(collecttionName);
+      console.log("child node name: ");
+      console.log(collecttionName);
+      console.log("child node name: ");
+      console.log(collecttionName);
 
 
       const valueTable = document.querySelector('.row-container');

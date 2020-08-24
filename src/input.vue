@@ -17,6 +17,7 @@
       };
     },
     mounted() {
+      /*
       // Fetch block options
       const { values } = this._props
       console.log(values);
@@ -45,7 +46,7 @@
       //callAPI(collectionName);
 
 
-      const valueTable = document.querySelector('.row-container');
+      const valueTable = document.querySelector('.row-container');*/
       //const options = this.getOptions();
 
       // hide all fields until the user choose a type
@@ -83,23 +84,38 @@
     },
     computed: {
       callAPI() {
-      let vm = this;
-      let DIRECTUS_ITEM_URL = "http://localhost:2443/corporatesite/items/";
+        const m2oplace = document.querySelectorAll('div[input-name="m2orepeater"]');
+        console.log("m2oplace: ");
+        console.log(m2oplace);
+        const content2up = document.getElementsByClassName('content two-up'); // or document.querySelectorAll('section.content.two-up')
+        console.log("content2up: ");
+        console.log(content2up);
 
-      this.$api.axios
-        .get(
-          DIRECTUS_ITEM_URL +
-            vm.collectionName 
-        )
-        .then(function(response) {
-          console.log(response);
-          return response;
-        })
-        .catch(function(error) {
-          console.error("Error:", error);
-        });
+        const content2up0 = content2up[0].firstElementChild;
+        console.log("first child node: ");
+        console.log(content2up0);
+        const val = content2up0.querySelector('.value .no-wrap');
+        console.log("val is: ");
+        console.log(val);
+        this.collectionName = val.innerHTML.toLowerCase().replace(/ /g,"_");
+        console.log(this.collectionName);
+        let vm = this;
+        let DIRECTUS_ITEM_URL = "http://localhost:2443/corporatesite/items/";
+        console.log(vm.collectionName);
+        this.$api.axios
+          .get(
+            DIRECTUS_ITEM_URL +
+              vm.collectionName 
+          )
+          .then(function(response) {
+            console.log(response);
+            return response;
+          })
+          .catch(function(error) {
+            console.error("Error:", error);
+          });
 
-      return null;
+        return null;
       }
     }
   }

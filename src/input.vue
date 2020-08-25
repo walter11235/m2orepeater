@@ -2,7 +2,7 @@
   <div id="app">
      <select v-model="selectedValue">
          <option disabled value="">Please select one</option>
-         <option v-for="item in this.dropdownAlternative" :value="item">{{item}}</option>
+         <option v-for="item in callAPI()" :value="item">{{item}}</option>
      </select>
     <button v-on:click="foo">foo</button>
   </div>
@@ -17,7 +17,6 @@
     data() {
       return {
         collectionName: "",
-        dropdownAlternative: callAPI(),
       };
     },
     mounted() {

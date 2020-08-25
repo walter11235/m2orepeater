@@ -112,7 +112,7 @@
             // Your code for handling the data you get from the API
             console.log("inside fetch");
             console.log(response);
-            response["data"].array.forEach(element => {
+            response["data"].forEach(element => {
               dropdownAlternative.push(element.identifier);
             });
             console.log("after push");

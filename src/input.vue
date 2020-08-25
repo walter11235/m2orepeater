@@ -158,6 +158,9 @@
       }
     },
     watch: {
+      collectionName: function(newVal) {
+        this.callAPI();
+      },
       findCollectionValue: function(newVal) {
         this.callAPI();
       },

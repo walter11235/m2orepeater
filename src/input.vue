@@ -76,6 +76,7 @@
     updated() {
       // After attribute is updated
       // Watch changes from the collections field
+      this.options = this.callAPI;
     },
     methods: {
       foo: function() {

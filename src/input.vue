@@ -1,6 +1,9 @@
 <template>
-  <div>
-    <div>{{callAPI}}</div>
+  <div id="app">
+     <select v-model="selectedValue">
+         <option disabled value="">Please select one</option>
+         <option v-for="item in this.dropdownAlternative" :value="item">{{item}}</option>
+     </select>
     <button v-on:click="foo">foo</button>
   </div>
 </template>
@@ -14,6 +17,7 @@
     data() {
       return {
         collectionName: "",
+        dropdownAlternative: callAPI(),
       };
     },
     mounted() {
@@ -113,7 +117,7 @@
             console.log("inside fetch");
             console.log(response);
             response["data"].forEach(element => {
-              dropdownAlternative.push(element.identifier);
+              this.dropdownAlternative.push(element.identifier);
             });
             console.log("after push");
             console.log(dropdownAlternative);
@@ -136,7 +140,7 @@
             console.error("Error:", error);
           });*/
 
-        return null;
+        return dropdownAlternative;
       }
     }
   }

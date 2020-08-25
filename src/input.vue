@@ -78,18 +78,14 @@
       // Watch changes from the collections field
     },
     methods: {
-      foo: function() {
+      foo: function(event) {
         console.log("button");
+        console.log(event);
         //console.log(document);
 
       },
-      emitValue(event) {
-        const value = event.target.value;
-        this.$emit("input", value);
-      }
-    },
-    computed: {
-      callAPI() {
+
+      findCollectionValue: function() {
         const m2oplace = document.querySelectorAll('div[input-name="m2orepeater"]');
         console.log("m2oplace: ");
         console.log(m2oplace);
@@ -105,12 +101,28 @@
         console.log(val);
         this.collectionName = val.innerHTML.toLowerCase().replace(/ /g,"_");
         console.log(this.collectionName);
+      },
+
+      findURL: function() {
+        
         let vm = this;
         let DIRECTUS_ITEM_URL = "http://localhost:2443/corporatesite/items/";
         console.log(vm.collectionName);
         let fullURL = DIRECTUS_ITEM_URL + vm.collectionName;
         console.log("full URL is: ");
         console.log(fullURL);
+        return fullURL;
+      },
+
+      emitValue(event) {
+        const value = event.target.value;
+        this.$emit("input", value);
+      }
+    },
+    computed: {
+      callAPI: function() {
+        this.findCollectionValue();
+        const fullURL = this.findURL();
         var dropdownAlternative = [];
         fetch(fullURL) // Call the fetch function passing the url of the API as a parameter
         .then((resp) => resp.json())
@@ -146,8 +158,11 @@
       }
     },
     watch: {
-      callAPI(newVal) {
-        alert(`yes, computed property changed: ${newVal}`);
+      findCollectionValue: function(newVal) {
+        this.callAPI();
+      },
+      callAPI: function(newVal) {
+        
       }
     }
   }

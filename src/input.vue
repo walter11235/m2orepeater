@@ -6,7 +6,6 @@
          <option v-for="item in this.options" :value="item">{{item}}</option>
      </select>
     <button v-on:click="foo">foo</button>
-    <span>>{{options}}</span>
   </div>
 </template>
 

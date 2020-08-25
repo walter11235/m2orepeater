@@ -17,7 +17,7 @@
     mixins: [mixin],
     data() {
       return {
-        collectionName: "",
+        collectionName: this.findCollectionValue(),
         options: null
       };
     },
@@ -159,6 +159,7 @@
     },
     watch: {
       collectionName: function(newVal) {
+        console.log("value in collectionName changed");
         this.callAPI();
       },
       findCollectionValue: function(newVal) {

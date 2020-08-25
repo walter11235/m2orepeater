@@ -2,7 +2,7 @@
   <div id="app">
      <select v-model="selectedValue">
          <option disabled value="">Please select one</option>
-         <option v-for="item in callAPI()" :value="item">{{item}}</option>
+         <option v-for="item in callAPI" :value="item">{{item}}</option>
      </select>
     <button v-on:click="foo">foo</button>
   </div>
@@ -116,7 +116,7 @@
             console.log("inside fetch");
             console.log(response);
             response["data"].forEach(element => {
-              this.dropdownAlternative.push(element.identifier);
+              dropdownAlternative.push(element.identifier);
             });
             console.log("after push");
             console.log(dropdownAlternative);

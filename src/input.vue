@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-     <select v-model="selectedvalue"  @change="emitValue($event)">
+     <select v-model="selectedvalue"  :value="selectedvalue" @change="emitValue($event)">
          <option disabled value="">Please select one</option>   
          <option v-for="item in this.options" :value="item">{{item}}</option>
      </select>
@@ -27,8 +27,11 @@
         selectedvalue: ""
       };
     },
-    mounted() {
+    created() {
       this.options = this.callAPI;
+    },
+    mounted() {
+      
       /*
       while (true) {
         let oldVal = this.collectionName;
@@ -135,13 +138,9 @@
 
       emitValue(event) {
         const value = event.target.value;
-        console.log("value in emit");
-        console.log(value);
-        console.log(event);
         this.$emit("input", value);
-      }
-    },
-    computed: {
+      },
+
       callAPI: function() {
         this.findCollectionValue();
         const fullURL = this.findURL();
@@ -165,10 +164,13 @@
         return dropdownAlternative;
       }
     },
+    computed: {
+      
+    },
     watch: {
       collectionName: function(newVal) {
-        console.log("value in collectionName changed");
-        this.callAPI();
+        //console.log("value in collectionName changed");
+        //this.callAPI();
       },
       findCollectionValue: function(newVal) {
         //this.callAPI();

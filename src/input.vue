@@ -1,13 +1,14 @@
 <template>
   <div id="app">
-     <select v-model="selectedvalue" :value="value">
+     <select v-model="selectedvalue" :value="selectedvalue" @change="selected = $event.target.value">
          <option disabled value="">Please select one</option>
          
          <option v-for="item in this.options" v-bind:value="item">{{item}}</option>
      </select>
-     <div class="value">{{selectedvalue}}</div>
+     <div>{{selectedvalue}}</div>
     <button v-on:click="foo">foo</button>
     <input :value="selectedvalue" @input="$emit('selectedvalue')" />
+    
   </div>
 </template>
 
@@ -133,6 +134,7 @@
         const value = event.target.value;
         console.log("value in emit");
         console.log(value);
+        console.log(event);
         this.$emit("input", value);
       }
     },

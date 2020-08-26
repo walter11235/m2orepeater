@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-     <select v-model="selectedvalue">
+     <select v-model="selectedvalue" :value="selectedvalue">
          <option disabled value="">Please select one</option>
          
          <option v-for="item in this.options" v-bind:value="item">{{item}}</option>

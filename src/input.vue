@@ -24,6 +24,7 @@
     },
     mounted() {
       this.options = this.callAPI;
+      /*
       while (true) {
         let oldVal = this.collectionName;
         this.collectionName = this.findCollectionValue();
@@ -34,7 +35,7 @@
           console.log(this.collectionName)
         }
         
-      }
+      }*/
       /*
       // Fetch block options
       const { values } = this._props

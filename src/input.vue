@@ -5,6 +5,7 @@
          
          <option v-for="item in this.options" :value="item">{{item}}</option>
      </select>
+     <div class="value">{{dropdownValue}}</div>
     <button v-on:click="foo">foo</button>
   </div>
 </template>
@@ -17,13 +18,14 @@
     data() {
       return {
         collectionName: this.findCollectionValue(),
-        options: null
+        options: null,
+        dropdownValue: ""
       };
     },
     mounted() {
       this.options = this.callAPI;
       while (0) {
-        this.findCollectionValue();
+        this.collectionName = this.findCollectionValue();
       }
       /*
       // Fetch block options
@@ -103,6 +105,7 @@
         console.log(val);
         this.collectionName = val.innerHTML.toLowerCase().replace(/ /g,"_");
         console.log(this.collectionName);
+        return this.collectionName;
       },
 
       findURL: function() {
@@ -118,6 +121,8 @@
 
       emitValue(event) {
         const value = event.target.value;
+        console.log("value in emit");
+        console.log(value);
         this.$emit("input", value);
       }
     },
@@ -152,9 +157,6 @@
       },
       findCollectionValue: function(newVal) {
         this.callAPI();
-      },
-      callAPI: function(newVal) {
-        
       }
     }
   }

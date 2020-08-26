@@ -7,6 +7,7 @@
      </select>
      <div class="value">{{selectedValue}}</div>
     <button v-on:click="foo">foo</button>
+    <input :value="value" @input="$emit('input')" />
   </div>
 </template>
 

@@ -1,13 +1,13 @@
 <template>
   <div id="app">
-     <select v-model="selectedValue">
+     <select v-model="selectedvalue">
          <option disabled value="">Please select one</option>
          
          <option v-for="item in this.options" v-bind:value="item">{{item}}</option>
      </select>
-     <div class="value">{{selectedValue}}</div>
+     <div class="value">{{selectedvalue}}</div>
     <button v-on:click="foo">foo</button>
-    <input :value="value" @input="$emit('input')" />
+    <input :value="selectedvalue" @input="$emit('selectedvalue')" />
   </div>
 </template>
 
@@ -20,7 +20,7 @@
       return {
         collectionName: "",
         options: null,
-        selectedValue: ""
+        selectedvalue: ""
       };
     },
     mounted() {

@@ -3,9 +3,9 @@
      <select v-model="selectedValue">
          <option disabled value="">Please select one</option>
          
-         <option v-for="item in this.options" :value="item">{{item}}</option>
+         <option v-for="item in this.options" v-bind:value="item">{{item}}</option>
      </select>
-     <div class="value">{{dropdownValue}}</div>
+     <div class="value">{{selectedValue}}</div>
     <button v-on:click="foo">foo</button>
   </div>
 </template>
@@ -19,18 +19,21 @@
       return {
         collectionName: this.findCollectionValue(),
         options: null,
-        dropdownValue: ""
+        selectedValue: ""
       };
     },
     mounted() {
       this.options = this.callAPI;
       while (true) {
         let oldVal = this.collectionName;
-        console.log("oldVal is:");
-        console.log(oldVal);
         this.collectionName = this.findCollectionValue();
-        console.log("new Val is:");
-        console.log(this.collectionName);
+        if(oldVal != this.collectionName) {
+          console.log("old is:");
+          console.log(oldVal);
+          console.log("new one:");
+          console.log(this.collectionName)
+        }
+        
       }
       /*
       // Fetch block options
@@ -161,7 +164,7 @@
         this.callAPI();
       },
       findCollectionValue: function(newVal) {
-        this.callAPI();
+        //this.callAPI();
       }
     }
   }

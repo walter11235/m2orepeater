@@ -31,27 +31,7 @@
       
     },
     mounted() {
-      this.findCollectionValue();
-        const fullURL = this.findURL();
-        this.options= [];
-        fetch(fullURL) // Call the fetch function passing the url of the API as a parameter
-        .then((resp) => resp.json())
-        .then(function(response) {
-            // Your code for handling the data you get from the API
-            console.log("inside fetch");
-            console.log(response);
-            response["data"].forEach(element => {
-              this.options.push(element.identifier);
-            });
-            console.log("after push");
-            console.log(this.options);
-        })
-        .catch(function(error) {
-            // This is where you run code if the server returns any errors
-            console.error("Error:", error);
-        });
-      console.log("options: ");
-      console.log(this.options);
+      this.options = this.callAPI();
       
       
       /*
@@ -190,13 +170,14 @@
       
     },
     watch: {
+      /*
       collectionName: function(newVal) {
         //console.log("value in collectionName changed");
         //this.callAPI();
       },
       findCollectionValue: function(newVal) {
         //this.callAPI();
-      }
+      }*/
     }
   }
 </script>

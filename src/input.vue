@@ -23,16 +23,18 @@
     data() {
       return {
         collectionName: "",
-        options: this.callAPI,
+        options: null,
         selectedvalue: ""
       };
     },
     created() {
-      // this.options = this.callAPI;
+      this.options = this.callAPI;
     },
     mounted() {
       
       // this.options = this.callAPI;
+      console.log("options: ");
+      console.log(this.options);
       
       
       /*

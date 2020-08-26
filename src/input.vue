@@ -24,8 +24,13 @@
     },
     mounted() {
       this.options = this.callAPI;
-      while (0) {
+      while (true) {
+        let oldVal = this.collectionName;
+        console.log("oldVal is:");
+        console.log(oldVal);
         this.collectionName = this.findCollectionValue();
+        console.log("new Val is:");
+        console.log(this.collectionName);
       }
       /*
       // Fetch block options

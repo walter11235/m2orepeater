@@ -23,7 +23,7 @@
     data() {
       return {
         collectionName: "",
-        options: this.callAP,
+        options: this.callAPI,
         selectedvalue: ""
       };
     },

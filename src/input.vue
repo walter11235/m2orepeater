@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-     <select v-model="selectedvalue"  @input="$emit('input', $event.target.value)">
+     <select v-model="selectedvalue"  @change="emitValue($event)">
          <option disabled value="">Please select one</option>   
          <option v-for="item in this.options" :value="item">{{item}}</option>
      </select>

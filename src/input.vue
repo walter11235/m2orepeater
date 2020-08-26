@@ -11,7 +11,6 @@
 
 <script>
   import mixin from "@directus/extension-toolkit/mixins/interface";
-  import callAPI from "C:/Users/hnguyen/Documents/WebsiteProjekt/cw90/corporate-website/source/directus/api/rest.php";
 
   export default {
     mixins: [mixin],
@@ -23,6 +22,9 @@
     },
     mounted() {
       this.options = this.callAPI;
+      while (0) {
+        this.findCollectionValue();
+      }
       /*
       // Fetch block options
       const { values } = this._props
@@ -140,20 +142,6 @@
             // This is where you run code if the server returns any errors
             console.error("Error:", error);
         });
-
-        
-        /*this.$api.axios
-          .get(fullURL)
-          .then(function(response) {
-            console.log("inside axios");
-            console.log(response);
-            this.restData = response;
-            //return response;
-          })
-          .catch(function(error) {
-            console.error("Error:", error);
-          });*/
-
         return dropdownAlternative;
       }
     },

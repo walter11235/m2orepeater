@@ -1,8 +1,8 @@
 <template>
   <div id="app">
-     <select v-model="selectedvalue"  :value="selectedvalue" @change="$emit('input', $event.target.value)">
+     <select v-model="selectedvalue"  :value="selectedvalue" @input="$emit('input', $event.target.value)">
          <option disabled value="">Please select one</option>   
-         <option v-for="item in this.options" :value="item">{{item}}</option>
+         <option v-for="option in options" :value="option">{{option}}</option>
      </select>
      <div>{{selectedvalue}}</div>
     <button v-on:click="foo">foo</button>

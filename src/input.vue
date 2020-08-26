@@ -17,7 +17,7 @@
     mixins: [mixin],
     data() {
       return {
-        collectionName: this.findCollectionValue(),
+        collectionName: "",
         options: null,
         selectedValue: ""
       };

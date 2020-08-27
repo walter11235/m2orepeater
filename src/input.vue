@@ -137,8 +137,8 @@
 
       emitValue(event) {
         //const value = event.target.value;
-        console.log("options before callAPI: ");
-        console.log(this.options);
+        // console.log("options before callAPI: ");
+        // console.log(this.options);
         var array = this.callAPI;
         const value = array[event];
         console.log("options array: ");
@@ -164,6 +164,30 @@
         console.log(event);
         //console.log(document);
 
+      },
+
+      callAPI: function() {
+        const collectionName = this.findCollectionValue();
+        const fullURL = this.findURL(collectionName);
+        var dropdownAlternative = [];
+        fetch(fullURL) // Call the fetch function passing the url of the API as a parameter
+        .then((resp) => resp.json())
+        .then(function(response) {
+            // Your code for handling the data you get from the API
+            console.log("inside fetch");
+            console.log(response);
+            response["data"].forEach(element => {
+              dropdownAlternative.push(element.identifier);
+            });
+            console.log("after push");
+            console.log(dropdownAlternative);
+        })
+        .catch(function(error) {
+            // This is where you run code if the server returns any errors
+            console.error("Error:", error);
+        });
+        this.options = dropdownAlternative;
+        return dropdownAlternative;
       },
       
 

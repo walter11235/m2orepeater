@@ -151,7 +151,7 @@
         console.log(event.target);
         console.log("value");
         console.log(value);
-        this.$emit("input", value);
+        //this.$emit("input", value);
       },
 
       callAPI: function() {

@@ -137,7 +137,7 @@
 
       emitValue(event) {
         //const value = event.target.value;
-        var array = this.callAPI();
+        var array = this.callAPI;
         const value = array[event];
         console.log("options array: ");
         console.log(this.options);
@@ -159,6 +159,12 @@
         //console.log(document);
 
       },
+      
+
+      
+    },
+    computed: {
+      
       callAPI: function() {
         const collectionName = this.findCollectionValue();
         const fullURL = this.findURL(collectionName);
@@ -182,12 +188,6 @@
         this.options = dropdownAlternative;
         return dropdownAlternative;
       },
-
-      
-    },
-    computed: {
-      
-      
 
       
       

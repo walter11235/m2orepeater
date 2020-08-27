@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-     <v-select  :options="this.options" v-model="selectedvalue" @input="emitValue" >
+     <v-select  :options="callAPI" :value.sync="selectedvalue" @input="emitValue" >
      </v-select>
      <div>{{selectedvalue}}</div>
     <button v-on:click="foo">foo</button>

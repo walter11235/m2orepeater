@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-     <v-select  :options="callAPI" :value="selectedvalue" @input="emitValue" >
+     <v-select  :options="callAPI" v-model="selectedvalue" @input="emitValue" >
      </v-select>
      <div>{{selectedvalue}}</div>
     <button v-on:click="foo">foo</button>
@@ -137,6 +137,9 @@
 
       emitValue(event) {
         //const value = event.target.value;
+        console.log("options array: ");
+        console.log(this.options);
+        
         console.log("event");
         console.log(event);
         console.log("target: ");

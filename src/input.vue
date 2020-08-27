@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-     <v-select  :options="callAPI" v-model="selectedvalue" @input="emitValue" >
+     <v-select  :options="this.options" v-model="selectedvalue" @input="emitValue" >
      </v-select>
      <div>{{selectedvalue}}</div>
     <button v-on:click="foo">foo</button>
@@ -35,7 +35,26 @@
       
     },
     mounted() {
-      
+      const collectionName = this.findCollectionValue();
+      const fullURL = this.findURL(collectionName);
+      var dropdownAlternative = [];
+      fetch(fullURL) // Call the fetch function passing the url of the API as a parameter
+        .then((resp) => resp.json())
+        .then(function(response) {
+          // Your code for handling the data you get from the API
+          console.log("inside fetch");
+          console.log(response);
+          response["data"].forEach(element => {
+            dropdownAlternative.push(element.identifier);
+          });
+          console.log("after push");
+          console.log(dropdownAlternative);
+        })
+        .catch(function(error) {
+            // This is where you run code if the server returns any errors
+            console.error("Error:", error);
+        });
+      this.options = dropdownAlternative;
       
       
       /*
@@ -164,30 +183,6 @@
         console.log(event);
         //console.log(document);
 
-      },
-
-      callAPI: function() {
-        const collectionName = this.findCollectionValue();
-        const fullURL = this.findURL(collectionName);
-        var dropdownAlternative = [];
-        fetch(fullURL) // Call the fetch function passing the url of the API as a parameter
-        .then((resp) => resp.json())
-        .then(function(response) {
-            // Your code for handling the data you get from the API
-            console.log("inside fetch");
-            console.log(response);
-            response["data"].forEach(element => {
-              dropdownAlternative.push(element.identifier);
-            });
-            console.log("after push");
-            console.log(dropdownAlternative);
-        })
-        .catch(function(error) {
-            // This is where you run code if the server returns any errors
-            console.error("Error:", error);
-        });
-        this.options = dropdownAlternative;
-        return dropdownAlternative;
       },
       
 

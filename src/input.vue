@@ -141,6 +141,8 @@
         const value = array[event];
         console.log("options array: ");
         console.log(this.options);
+        console.log("element event in array:");
+        console.log(this.options[event]);
 
         console.log("event");
         console.log(event);

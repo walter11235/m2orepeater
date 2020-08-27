@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-     <v-select v-model="selectedvalue" :options="options" :value="selectedvalue" @input="$emit('selectedvalue')" >
+     <v-select v-model="selectedvalue" :options="options" :value="selectedvalue" @input="emitValue" >
      </v-select>
      <div>{{selectedvalue}}</div>
     <button v-on:click="foo">foo</button>
@@ -145,6 +145,12 @@
 
       emitValue(event) {
         const value = event.target.value;
+        console.log("event");
+        console.log(event);
+        console.log("target: ");
+        console.log(event.target);
+        console.log("value");
+        console.log(value);
         this.$emit("input", value);
       },
 

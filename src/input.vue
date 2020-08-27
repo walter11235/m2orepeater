@@ -137,16 +137,19 @@
 
       emitValue(event) {
         //const value = event.target.value;
+        const value = this.options[event];
         console.log("options array: ");
         console.log(this.options);
-        
+
         console.log("event");
         console.log(event);
         console.log("target: ");
         console.log(event.target);
         console.log("value");
         console.log(event.target.value);
-        //this.$emit("input", value);
+        console.log("value to be emitted; ");
+        console.log(value);
+        this.$emit("input", this.options[event]);
       },
       debouncedQuery: _.debounce(function () { this.query(); }, 300),
       foo: function(event) {

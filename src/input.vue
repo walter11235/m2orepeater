@@ -128,8 +128,8 @@
         const m2oplace = document.querySelectorAll('div[input-name="m2orepeater"]');
         console.log("m2oplace: ");
         console.log(m2oplace);
-        //const content2up = document.getElementsByClassName('content two-up'); // or document.querySelectorAll('section.content.two-up')
-        const content2up = document.querySelectorAll('.content.two-up')
+        const content2up = document.getElementsByClassName('content two-up'); // or document.querySelectorAll('section.content.two-up')
+        //const content2up = document.querySelectorAll('.content.two-up')
         console.log("content2up: ");
         console.log(content2up);
 

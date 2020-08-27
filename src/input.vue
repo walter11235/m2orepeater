@@ -143,6 +143,8 @@
         console.log(this.options);
         console.log("element event in array:");
         console.log(this.options[event]);
+        console.log("value is: ");
+        console.log(value);
 
         console.log("event");
         console.log(event);

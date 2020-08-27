@@ -37,7 +37,7 @@
     },
     mounted() {
       this.options = this.callAPI();
-      this.use(Vuetify);
+      Vue.use(Vuetify);
       
       
       /*

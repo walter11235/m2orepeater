@@ -32,10 +32,10 @@
       };
     },
     created() {
-      this.options = this.callAPI;
+      
     },
     mounted() {
-      
+      this.options = this.callAPI();
       
       
       /*
@@ -110,7 +110,7 @@
       
     },
     computed: {
-      callAPI: function() {
+      callAPI() {
         this.findCollectionValue();
         const fullURL = this.findURL();
         var dropdownAlternative = [];
@@ -140,7 +140,7 @@
 
       },
 
-      findCollectionValue: function() {
+      findCollectionValue() {
         const m2oplace = document.querySelectorAll('div[input-name="m2orepeater"]');
         console.log("m2oplace: ");
         console.log(m2oplace);
@@ -159,7 +159,7 @@
         return this.collectionName;
       },
 
-      findURL: function() {
+      findURL() {
         
         let vm = this;
         let DIRECTUS_ITEM_URL = "http://localhost:2443/corporatesite/items/";

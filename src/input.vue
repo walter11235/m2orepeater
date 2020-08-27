@@ -159,10 +159,6 @@
         //console.log(document);
 
       },
-
-      
-    },
-    computed: {
       callAPI: function() {
         const collectionName = this.findCollectionValue();
         const fullURL = this.findURL(collectionName);
@@ -186,6 +182,11 @@
         this.options = dropdownAlternative;
         return dropdownAlternative;
       },
+
+      
+    },
+    computed: {
+      
       
 
       

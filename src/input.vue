@@ -137,6 +137,8 @@
 
       emitValue(event) {
         //const value = event.target.value;
+        console.log("options before callAPI: ");
+        console.log(this.options);
         var array = this.callAPI;
         const value = array[event];
         console.log("options array: ");

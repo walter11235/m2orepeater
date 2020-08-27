@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-     <v-select  :options="options" :value="selectedvalue" @input="emitValue" >
+     <v-select  :options="callAPI" :value="selectedvalue" @input="emitValue" >
      </v-select>
      <div>{{selectedvalue}}</div>
     <button v-on:click="foo">foo</button>
@@ -156,7 +156,7 @@
       
     },
     computed: {
-      callAPI() {
+      callAPI: function() {
         const collectionName = this.findCollectionValue();
         const fullURL = this.findURL(collectionName);
         var dropdownAlternative = [];

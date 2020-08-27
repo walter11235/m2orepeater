@@ -154,6 +154,9 @@
         //this.$emit("input", value);
       },
 
+      
+    },
+    computed: {
       callAPI: function() {
         this.findCollectionValue();
         const fullURL = this.findURL();
@@ -176,8 +179,6 @@
         });
         return dropdownAlternative;
       }
-    },
-    computed: {
       
     },
     watch: {

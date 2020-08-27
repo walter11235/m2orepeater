@@ -105,6 +105,7 @@
       // Watch changes from the collections field
     },
     methods: {
+      debouncedQuery: _.debounce(function () { this.query(); }, 300),
       foo: function(event) {
         console.log("button");
         console.log(event);

@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-     <v-select v-model="selectedvalue" :options="options" :value="selectedvalue" @input="$emit('input', $event.target.value)" >
+     <v-select v-model="selectedvalue" :options="options" :value="selectedvalue" @input="$emit('selectedvalue')" >
      </v-select>
      <div>{{selectedvalue}}</div>
     <button v-on:click="foo">foo</button>

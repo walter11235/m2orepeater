@@ -22,7 +22,7 @@
 
 <script>
   import mixin from "@directus/extension-toolkit/mixins/interface";
-
+  import Vuetify from 'vuetify';
   export default {
     mixins: [mixin],
     data() {

@@ -137,7 +137,7 @@
 
       emitValue(event) {
         //const value = event.target.value;
-        const value = this.options[event];
+        var value = this.options[event];
         console.log("options array: ");
         console.log(this.options);
 

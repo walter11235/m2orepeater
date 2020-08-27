@@ -105,41 +105,6 @@
       // Watch changes from the collections field
     },
     methods: {
-      
-
-      
-    },
-    computed: {
-      callAPI() {
-        this.findCollectionValue();
-        const fullURL = this.findURL();
-        var dropdownAlternative = [];
-        fetch(fullURL) // Call the fetch function passing the url of the API as a parameter
-        .then((resp) => resp.json())
-        .then(function(response) {
-            // Your code for handling the data you get from the API
-            console.log("inside fetch");
-            console.log(response);
-            response["data"].forEach(element => {
-              dropdownAlternative.push(element.identifier);
-            });
-            console.log("after push");
-            console.log(dropdownAlternative);
-        })
-        .catch(function(error) {
-            // This is where you run code if the server returns any errors
-            console.error("Error:", error);
-        });
-        return dropdownAlternative;
-      },
-      debouncedQuery: _.debounce(function () { this.query(); }, 300),
-      foo: function(event) {
-        console.log("button");
-        console.log(event);
-        //console.log(document);
-
-      },
-
       findCollectionValue() {
         const m2oplace = document.querySelectorAll('div[input-name="m2orepeater"]');
         console.log("m2oplace: ");
@@ -159,12 +124,12 @@
         return this.collectionName;
       },
 
-      findURL() {
-        
+      findURL(collectionName) {
+        this.collectionName = collectionName;
         let vm = this;
         let DIRECTUS_ITEM_URL = "http://localhost:2443/corporatesite/items/";
         console.log(vm.collectionName);
-        let fullURL = DIRECTUS_ITEM_URL + vm.collectionName;
+        let fullURL = DIRECTUS_ITEM_URL + collectionName;
         console.log("full URL is: ");
         console.log(fullURL);
         return fullURL;
@@ -180,6 +145,42 @@
         console.log(event.target.value);
         //this.$emit("input", value);
       },
+      debouncedQuery: _.debounce(function () { this.query(); }, 300),
+      foo: function(event) {
+        console.log("button");
+        console.log(event);
+        //console.log(document);
+
+      },
+
+      
+    },
+    computed: {
+      callAPI() {
+        const collectionName = this.findCollectionValue();
+        const fullURL = this.findURL(collectionName);
+        var dropdownAlternative = [];
+        fetch(fullURL) // Call the fetch function passing the url of the API as a parameter
+        .then((resp) => resp.json())
+        .then(function(response) {
+            // Your code for handling the data you get from the API
+            console.log("inside fetch");
+            console.log(response);
+            response["data"].forEach(element => {
+              dropdownAlternative.push(element.identifier);
+            });
+            console.log("after push");
+            console.log(dropdownAlternative);
+        })
+        .catch(function(error) {
+            // This is where you run code if the server returns any errors
+            console.error("Error:", error);
+        });
+        return dropdownAlternative;
+      },
+      
+
+      
       
     },
     watch: {

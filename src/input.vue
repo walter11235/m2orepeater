@@ -32,10 +32,10 @@
       };
     },
     created() {
-      
+      this.options = this.callAPI;
     },
     mounted() {
-      this.options = this.callAPI();
+      
       
       
       /*
@@ -105,6 +105,33 @@
       // Watch changes from the collections field
     },
     methods: {
+      
+
+      
+    },
+    computed: {
+      callAPI: function() {
+        this.findCollectionValue();
+        const fullURL = this.findURL();
+        var dropdownAlternative = [];
+        fetch(fullURL) // Call the fetch function passing the url of the API as a parameter
+        .then((resp) => resp.json())
+        .then(function(response) {
+            // Your code for handling the data you get from the API
+            console.log("inside fetch");
+            console.log(response);
+            response["data"].forEach(element => {
+              dropdownAlternative.push(element.identifier);
+            });
+            console.log("after push");
+            console.log(dropdownAlternative);
+        })
+        .catch(function(error) {
+            // This is where you run code if the server returns any errors
+            console.error("Error:", error);
+        });
+        return dropdownAlternative;
+      },
       debouncedQuery: _.debounce(function () { this.query(); }, 300),
       foo: function(event) {
         console.log("button");
@@ -144,41 +171,15 @@
       },
 
       emitValue(event) {
-        const value = event.target.value;
+        //const value = event.target.value;
         console.log("event");
         console.log(event);
         console.log("target: ");
         console.log(event.target);
         console.log("value");
-        console.log(value);
+        console.log(event.target.value);
         //this.$emit("input", value);
       },
-
-      
-    },
-    computed: {
-      callAPI: function() {
-        this.findCollectionValue();
-        const fullURL = this.findURL();
-        var dropdownAlternative = [];
-        fetch(fullURL) // Call the fetch function passing the url of the API as a parameter
-        .then((resp) => resp.json())
-        .then(function(response) {
-            // Your code for handling the data you get from the API
-            console.log("inside fetch");
-            console.log(response);
-            response["data"].forEach(element => {
-              dropdownAlternative.push(element.identifier);
-            });
-            console.log("after push");
-            console.log(dropdownAlternative);
-        })
-        .catch(function(error) {
-            // This is where you run code if the server returns any errors
-            console.error("Error:", error);
-        });
-        return dropdownAlternative;
-      }
       
     },
     watch: {

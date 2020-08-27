@@ -35,7 +35,7 @@
       
     },
     mounted() {
-      this.options = this.callAPI();
+      
       
       
       /*
@@ -176,6 +176,7 @@
             // This is where you run code if the server returns any errors
             console.error("Error:", error);
         });
+        this.options = dropdownAlternative;
         return dropdownAlternative;
       },
       

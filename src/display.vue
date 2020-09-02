@@ -1,6 +1,7 @@
 <template>
   <div>
     {{ displayValue }}
+    <span>this is in display.vue</span>
   </div>
 </template>
 
@@ -11,7 +12,6 @@
     mixins: [mixin],
     computed: {
       displayValue() {
-        console.log("this is in display vue");
         console.log(this.value);
         if (this.selectedvalue)
           return this.selectedvalue.toLowerCase();

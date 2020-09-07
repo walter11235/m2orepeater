@@ -1,1 +1,9 @@
-input[data-v-70248b]{border-radius:var(--border-radius)}#collections[data-v-70248b],#items[data-v-70248b]{width:50%}
+input[data-v-70248b] {
+  border-radius: var(--border-radius);
+}
+#collections[data-v-70248b] {
+  width: 50%;
+}
+#items[data-v-70248b] {
+  width: 50%;
+}

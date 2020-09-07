@@ -4,19 +4,20 @@
   <div id="app" class="content two-up">
     <!-- collecttion dropbox -->
       <v-select 
-        id = "collections" 
-        :options="collectionOptions" 
+        
+        :options="choices" 
         :value.sync="selectedCollection"
-        @input="this.emitCollectionValue" 
+        @input="this.emitCollectionValue"
         return-object>
       </v-select>
       
     <!-- item dropbox, item will reatively change when selected collection changes -->
       <v-select 
-        id = "items" 
-        :options="itemOptions" 
-        :value="selectedvalue"  
+        
+        :options="items"
+        v-model="selectedvalue"  
         @input="this.emitItemValue" 
+        autocomplete  
         return-object>
      </v-select>
 
@@ -27,33 +28,48 @@
      <span>this is a test</span>
      <!-- value is the stored value of last emitted "collection" and "item" -->
      <span>{{this.value}}</span>
+
+     
     
   </div>
 </template>
 
 <script>
   import mixin from "@directus/extension-toolkit/mixins/interface";
+  import { mapState } from 'vuex';
   export default {
     mixins: [mixin],
     data() {
       return {
-        collectionOptions: [], // possible selection of collection
+        items:[],
         selectedCollection: "", // the selected collection
-        itemOptions: [], // possible selection of item
+        itemOptions: {}, // possible selection of item
         selectedvalue: "", // the selected item
         toEmitObject: { // object to be emitted
           collection: null,
           item: null,
-          
         }
       };
     },
     // after the page is loaded
     mounted() {
-
+      
       console.log("inside mounted");
-      this.collectionOptions = this.getCollectionsMethod();
-
+      console.log("this.$store is");
+      console.log(this.$store);
+      console.log("state is:");
+      console.log(this.$store.state);
+      console.log("helper is:");
+      console.log(this.$helpers);
+      console.log("this");
+      console.log(this);
+      console.log("current project key");
+      console.log(this.currentProjectKey);
+      console.log("getters are");
+      console.log(this.$store.getters);
+      
+      
+      console.log("inside mounted");
       if (this.value) {
         if (this.value.collection) {
           this.toEmitObject.collection = this.value.collection;
@@ -61,9 +77,9 @@
           console.log("selected col:");
           console.log(this.selectedCollection);
 
-          this.itemOptions = this.getItems(this.selectedCollection);
+          //this.itemOptions = this.getItems(this.selectedCollection);
           console.log("select options in mounted");
-          console.log(this.itemOptions);
+          //console.log(this.itemOptions);
 
           if (this.value.item) {
             this.selectedvalue = this.value.item;
@@ -77,6 +93,25 @@
     },
     // necessary methods
     methods: {
+      ...mapState(['currentProjectKey']),
+      collections() {
+			  return this.$store.state.collections;
+      },
+      /*
+      filterCollection() {
+        return Object.values(this.collections())
+				.filter(
+					collection =>
+						collection.hidden == false &&
+						collection.managed == true &&
+						collection.collection.startsWith('directus_') === false
+        )
+        .map(element => this.$helpers.formatCollection(element.collection))
+      },*/
+      testMethod() {
+        console.log("inside consoleMethod");
+        //console.log(this.$api.getItems);
+      },
     /**
      * @method isEmpty
      * 
@@ -97,17 +132,12 @@
      * @param Integer $event The index value of selected collection.
      * Save selected collection value in @selectedCollection and @toEmitObject.collection. Emit if @toEmitObject.item is not null or empty.
      */
-      emitCollectionValue(event) {
-        this.toEmitObject.collection = this.collectionOptions[event];
+      emitCollectionValue($event) {
         //console.log("inside emit Collection:");
-        //console.log(this.toEmitObject);
-        this.selectedCollection = this.collectionOptions[event];
-
-        //console.log("selected value:");
-        //console.log(this.selectedCollection);
-        //if (this.toEmitObject.item) {
+        //console.log($event);
+        this.toEmitObject.collection = $event;
+        this.selectedCollection = $event;
         this.$emit("input", this.toEmitObject);
-        //}
       },
 
     /**
@@ -119,10 +149,12 @@
      * Save selected item value in @selectedvalue and @toEmitObject.item. Emit if @toEmitObject.collection is not null or empty.
      */
       emitItemValue(event) {
-        this.selectedvalue = this.itemOptions[event];
+        console.log("inside emit Value");
+        console.log(event);
+        this.selectedvalue = event;
         //console.log("selected value:");
         //console.log(this.selectedvalue);
-        this.toEmitObject.item = this.itemOptions[event];
+        this.toEmitObject.item = event;
         //if (this.toEmitObject.collection) {
           this.$emit("input", this.toEmitObject);
         //}
@@ -136,66 +168,74 @@
      * @param String $currentSelectedCollection The value of the selected collection.
      * @return Array Contains all possible item value from the selected collection.
      */
-      getItems: function(currentSelectedCollection) {
+      getItems: async function(collectionArray) {
+        /*
+        console.log("in getItems");
+        console.log(collectionArray);
         var dropdownAlternative = [];
-        const ITEM_URL = "http://localhost:2443/corporatesite/items/" + currentSelectedCollection;
-        fetch(ITEM_URL) // Call the fetch function passing the url of the API as a parameter
-        .then((resp) => resp.json())
-        .then(function(response) {
-            response["data"].forEach(element => {
-              dropdownAlternative.push(element.identifier);
-            });
-        })
-        .catch(function(error) {
-            console.error("Error:", error);
+        collectionArray["data"].forEach(element => {
+          let identifier = element.identifier;
+          let name = element.name;
+          dropdownAlternative[identifier] = name;
         });
-        return dropdownAlternative;
-      },
-
-    /**
-     * @method getCollectionsMethod
-     * 
-     * @author hnguyen
-     * 
-     * @return Array Contains all possible collection value from COLLECTION_URL.
-     */
-      getCollectionsMethod: function() {
-        
-        var collectionDropdown = [];
-        const COLLECTION_URL = "http://localhost:2443/corporatesite/collections";
+        //this.itemOptions = dropdownAlternative;
+        console.log("inside getItems");
+        console.log(this.itemOptions);*/
         
 
-        fetch(COLLECTION_URL) // Call the fetch function passing the url of the API as a parameter
-        .then((resp) => resp.json())
-        .then(function(response) {
-            // Your code for handling the data you get from the API
-            //console.log("inside fetch");
-            //console.log(response);
-            response["data"].forEach(element => {
-              const valueToAdd = element.collection;
-              if(valueToAdd.startsWith("directus_")) {
-                return;
-              }
-              collectionDropdown.push(valueToAdd);
-            });
-            //console.log("after push");
-            //console.log(collectionDropdown);
-        })
-        .catch(function(error) {
-            console.error("Error:", error);
-        });
-        return collectionDropdown;
+        let choices = {};
+        Object.keys(collectionArray)
+          .forEach(key => {
+            choices[key] = this.$helpers.formatTitle(key);
+          });
+        return choices;
       },
-
-      
+      getItemsFromSelectedCollection:  function(selectedCollection) {
+        this.$api.getItems(selectedCollection, {}).then(res => {
+          console.log(res.data);
+          let arr = res.data;
+          let result = [];
+          let objectresult = {};
+          console.log("this item before");
+          console.log(this.items);
+          for (var i=0; i < arr.length; i++) {
+            result[i] = arr[i].name;
+            objectresult[arr[i].identifier] = arr[i].name;
+          }
+          this.items = objectresult;
+          return objectresult;
+        });
+      }
       
     },
     computed: {
-      //getCollections: function() {
-      //  return this.getCollectionsMethod();
-      //}
+      choices() {
+        const collections = this.$store.state.collections || {};
+        let choices = {};
+        Object.keys(collections)
+          .filter(key => {
+            // filter all the collection which starts with "directus_"
+            return key.startsWith('directus_') === false;
+          })
+          .forEach(key => {
+            // for Example: choices["teaser_simple"] = "Teaser Simple"
+            choices[key] = this.$helpers.formatTitle(key);
+          });
+        return choices;
+      },
+      
+      /*itemschoices() {
+        console.log("inside computed method item choices");
+        console.log(this.selectedCollection);
+        let itemchoices = {};
+        console.log("return value");
+        //console.log(this.getItemsFromSelectedCollection(this.selectedCollection));
+        return this.getItemsFromSelectedCollection(this.selectedCollection);
+      },*/
+
+      
+
     },
-    
     watch: {
     /**
      * @function selectedCollection
@@ -208,36 +248,55 @@
      * Watch changes in selectedCollection.
      */
       selectedCollection: function(currentSelectedCollection, oldSelectedCollection) {
-        console.log("cur val in watch:");
-        console.log(currentSelectedCollection);
-        console.log("olda val in watch");
-        console.log(oldSelectedCollection);
-
-        // first initial, oldSelectedCollection is empty or null, current selected collection is not empty and item is not yet selected
         if(!oldSelectedCollection && currentSelectedCollection) {
-
-          console.log("inside first if");
-          this.itemOptions = this.getItems(currentSelectedCollection);
-
-        // when change selected collection value without selecting item
+          this.$api.getItems(currentSelectedCollection, {}).then(res => {
+            console.log(res.data);
+            let arr = res.data;
+            let result = [];
+            let objectresult = {};
+            console.log("this item before");
+            console.log(this.items);
+            for (var i=0; i < arr.length; i++) {
+              result[i] = arr[i].name;
+              objectresult[arr[i].identifier] = arr[i].name;
+            }
+            this.items = objectresult;
+          });
         } else if (oldSelectedCollection && currentSelectedCollection && this.isEmpty(this.selectedvalue)) {
-          
-          console.log("inside second if");
-          console.log(this.selectedvalue);
-          this.itemOptions = this.getItems(currentSelectedCollection);
-
-        // when change selected collection value, item from old collection value is selected
+          this.$api.getItems(currentSelectedCollection, {}).then(res => {
+            console.log(res.data);
+            let arr = res.data;
+            let result = [];
+            let objectresult = {};
+            console.log("this item before");
+            console.log(this.items);
+            for (var i=0; i < arr.length; i++) {
+              result[i] = arr[i].name;
+              objectresult[arr[i].identifier] = arr[i].name;
+            }
+            this.items = objectresult;
+          });
         } else {
-          console.log("inside third if");
-          // collection and item are not null
-          // collection is updated => erase item
           this.selectedvalue = null;
           this.toEmitObject.item = null;
-          
-          this.itemOptions = this.getItems(currentSelectedCollection);
+          this.$api.getItems(currentSelectedCollection, {}).then(res => {
+            console.log(res.data);
+            let arr = res.data;
+            let result = [];
+            let objectresult = {};
+            console.log("this item before");
+            console.log(this.items);
+            for (var i=0; i < arr.length; i++) {
+              result[i] = arr[i].name;
+              objectresult[arr[i].identifier] = arr[i].name;
+            }
+            this.items = objectresult;
+          });
         }
+        
       }
     }
+
   }
 </script>
 
